@@ -2,28 +2,43 @@ services:
   db:
     image: postgres:16
     environment:
-      - POSTGRES_DB=crm
-    env_file:
-      - pg_password.env
-    ports:
-      - "5432:5432"
+      #POSTGRES_PASSWORD: secret123
+      POSTGRES_DB: crm
+    env_file: pg_password.env
+    #ports:
+    #  - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - pgdata:/var/lib/postgresql/data
-  app:
+    networks:
+      - db
+
+  datahub:
     build: .
     ports:
-      - "5000:5000"
+      - 5064:5000
+    command: gunicorn -w 3 -t 60 -b 0.0.0.0:5000 app:app
     environment:
-      - DB_HOST=db
-      - DB_NAME=crm
-      - DB_USER=postgres
-    env_file:
-      - pg_password.env
+      DB_HOST: db
+      DB_NAME: crm
+      DB_USER: postgres
+      #DB_PASSWORD: secret123
+      UPLOAD_FOLDER: /app/uploads
+      SCRIPT_NAME: /datahub
+    env_file: pg_password.env
     volumes:
       - uploads:/app/uploads
     depends_on:
       - db
+    networks:
+      - db
+      - nginx
+
 volumes:
   pgdata:
   uploads:
+
+networks:
+  db:
+  nginx:
+    external: true
