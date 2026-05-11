@@ -3,4 +3,4 @@ CREATE TABLE IF NOT EXISTS _users (id SERIAL PRIMARY KEY, username VARCHAR(50) U
 CREATE TABLE IF NOT EXISTS _logs (id SERIAL PRIMARY KEY, username VARCHAR(50), action VARCHAR(200), table_name VARCHAR(100), details TEXT, created_at TIMESTAMP DEFAULT NOW());
 CREATE TABLE IF NOT EXISTS _templates (id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, table_name VARCHAR(100), config TEXT, created_at TIMESTAMP DEFAULT NOW());
 CREATE TABLE IF NOT EXISTS _photos (id SERIAL PRIMARY KEY, table_name VARCHAR(100), row_id INT, filename VARCHAR(255), created_at TIMESTAMP DEFAULT NOW());
-INSERT INTO _users (username, password, role) VALUES ('admin', 'admin123', 'admin') ON CONFLICT (username) DO NOTHING;
+INSERT INTO _users (username, password, role) VALUES ('admin', 'abc123', 'admin') ON CONFLICT (username) DO NOTHING;
