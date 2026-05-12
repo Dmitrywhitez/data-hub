@@ -77,15 +77,15 @@ BASE_STYLE = """<style>:root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;-
 THEME_SCRIPT = """<script>document.documentElement.className=localStorage.getItem('theme')||'dark';function toggleTheme(){var t=document.documentElement.className==='dark'?'light':'dark';document.documentElement.className=t;localStorage.setItem('theme',t);document.getElementById('themeBtn').textContent=t==='dark'?'☀️':'🌙'}</script>"""
 
 def hdr(user):
-    nav_items = [('Data', 'index'), ('Overview', 'overview'), ('Dashboard', 'dashboard'), ('Pivot', 'pivot'), ('Compare', 'compare'), ('Templates', 'templates'), ('Logs', 'logs'), ('Backup', 'backup', 'btn btn-orange btn-sm')]
-    nav = ''
-    for item in nav_items:
-        if len(item) == 2:
-            nav += f'<a href="{url_prefix}/{item[1]}">{item[0]}</a> '
-        else:
-            nav += f'<a href="{url_prefix}/{item[1]}" class="{item[2]}">{item[0]}</a> '
-    return f'<div class="header"><h1>Data Hub Pro v3.4</h1><div style="display:flex;align-items:center;gap:12px;"><button id="themeBtn" class="theme-toggle" onclick="toggleTheme()">☀️</button><span style="color:var(--text2)">{user}</span><a href="{url_prefix}/logout" class="btn btn-red btn-sm">Logout</a></div></div><div class="container"><div class="nav">{nav}</div>'
-
+    nav = '<a href="' + url_prefix + '/">Data</a> '
+    nav += '<a href="' + url_prefix + '/overview">Overview</a> '
+    nav += '<a href="' + url_prefix + '/dashboard">Dashboard</a> '
+    nav += '<a href="' + url_prefix + '/pivot">Pivot</a> '
+    nav += '<a href="' + url_prefix + '/compare">Compare</a> '
+    nav += '<a href="' + url_prefix + '/templates">Templates</a> '
+    nav += '<a href="' + url_prefix + '/logs">Logs</a> '
+    nav += '<a href="' + url_prefix + '/backup" class="btn btn-orange btn-sm">Backup</a>'
+    return '<div class="header"><h1>Data Hub Pro v3.4</h1><div style="display:flex;align-items:center;gap:12px;"><button id="themeBtn" class="theme-toggle" onclick="toggleTheme()">☀️</button><span style="color:var(--text2)">' + user + '</span><a href="' + url_prefix + '/logout" class="btn btn-red btn-sm">Logout</a></div></div><div class="container"><div class="nav">' + nav + '</div>'
 # ==================== LOGIN ====================
 LOGIN_HTML = f"""<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Data Hub Pro v3.4</title><style>body{{font-family:sans-serif;background:#0d1117;color:#e6edf3;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}}.box{{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:24px;width:400px}}h3{{color:#58a6ff;margin-bottom:16px}}input{{width:100%;padding:10px;background:#0d1117;border:1px solid #30363d;color:#e6edf3;border-radius:6px;margin-bottom:12px}}.btn{{width:100%;padding:10px;background:#58a6ff;border:none;border-radius:6px;font-weight:bold;cursor:pointer;color:#000}}.err{{background:#3d1a1a;color:#fdaeb7;padding:8px;border-radius:4px;margin-bottom:12px}}</style></head><body><div class="box"><h3>Data Hub Pro v3.4</h3>FLASH<form method="POST"><input name="username" placeholder="Username"><input type="password" name="password" placeholder="Password"><button class="btn">Login</button></form><p style="font-size:12px;color:#8b949e;margin-top:12px;">Default: admin / your_password</p></div></body></html>"""
 
