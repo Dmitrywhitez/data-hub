@@ -20,7 +20,6 @@ services:
       DB_NAME: crm
       DB_USER: postgres
       UPLOAD_FOLDER: /app/uploads
-      SECRET_KEY: ${SECRET_KEY:-datahub-super-secret-key-2026}
       URL_PREFIX: /datahub
     env_file:
       - pg_password.env
